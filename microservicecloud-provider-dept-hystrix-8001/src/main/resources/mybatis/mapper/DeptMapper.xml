@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nskjy.springcloud.dao.DeptMapper">
+    <select id="findById" resultType="dept" parameterType="Integer">
+        select deptno, dname, db_source from dept where deptno = #{deptno}
+    </select>
+    <select id="findAll" resultType="dept">
+        select deptno, dname, db_source from dept
+    </select>
+
+    <insert id="addDept" parameterType="dept">
+        insert into dept(dname, db_source) values (#{dname}, database())
+    </insert>
+    <delete id="deleById" parameterType="Integer">
+        delete from dept where deptno = #{deptno}
+    </delete>
+    <update id="updateDept" parameterType="dept">
+        update dept
+        <set>
+            <if test="dname != null and dname != ''">dname = #{dname}</if>
+        </set>
+    </update>
+
+</mapper>
